@@ -1,7 +1,26 @@
 from django.db import models
 
+
 # Create your models here.
-class GeneralSetting(models.Model):
+
+class AbstractModel(models.Model):
+    updated_date = models.DateTimeField(
+        blank=True,
+        auto_now=True,
+        verbose_name="updated date",
+    )
+    created_date = models.DateTimeField(
+        blank=True,
+        auto_now_add=True,
+        verbose_name="created date",
+    )
+
+
+class Meta:
+    abstract = True
+
+
+class GeneralSetting(AbstractModel):
     name = models.CharField(
         default='',
         max_length=254,
@@ -22,26 +41,17 @@ class GeneralSetting(models.Model):
         verbose_name="Parameter",
 
     )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name="updated date",
 
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name="created date",
-
-    )
     def __str__(self):
         return f"General Setting: {self.name}"
+
     class Meta:
         verbose_name = 'General Setting'
         verbose_name_plural = 'General Settings'
-        ordering = ('name', )
+        ordering = ('name',)
 
-class ImageSetting(models.Model):
+
+class ImageSetting(AbstractModel):
     name = models.CharField(
         default='',
         max_length=254,
@@ -61,18 +71,6 @@ class ImageSetting(models.Model):
         blank=True,
         help_text="",
         upload_to='images/',
-    )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name="updated date",
-
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name="created date",
-
     )
 
     def __str__(self):
