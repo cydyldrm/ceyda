@@ -15,9 +15,8 @@ class AbstractModel(models.Model):
         verbose_name="created date",
     )
 
-
-class Meta:
-    abstract = True
+    class Meta:
+        abstract = True
 
 
 class GeneralSetting(AbstractModel):
@@ -80,3 +79,4 @@ class ImageSetting(AbstractModel):
         verbose_name = 'Image Setting'
         verbose_name_plural = 'Image Settings'
         ordering = ('name',)
+
